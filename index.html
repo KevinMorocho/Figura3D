@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+</head>
+<body>
+     <h1><center>Kevin Morocho</center></h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.js" ></script>
+    <script>
+
+        
+
+        //crear escena
+        var scene = new THREE.Scene();
+        scene.background = new THREE.Color("rgb(100,114,117)");
+        //scene.fog = new THREE.Fog(0x76456c, 0.1, 8);
+
+        //agregar camara
+        var camera = new THREE.PerspectiveCamera(
+            75, 
+            window.innerWidth/window.innerHeight
+        );
+
+        //render
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        
+        
+        //agregar geometria 
+        var geometry = new THREE.BoxGeometry();
+        var material =new THREE.MeshBasicMaterial({color: 0xE6F9F6, //wireframe:true,
+        });
+        
+        var material1 =new THREE.MeshBasicMaterial({color: 0xE0FFF3, //wireframe:true,
+        });
+
+        var material2 =new THREE.MeshBasicMaterial({color: 0xEFFF30, //wireframe:true,
+        });
+
+        var cube =new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        
+        var circle =new THREE.Mesh(new THREE.CircleGeometry(2,33),material1);
+        circle.position.x=5;
+        scene.add(circle);
+        
+        var ci =new THREE.Mesh(new THREE.CylinderGeometry(2, 2, 4, 5, 2),material2);
+        ci.position.x=-5;
+        scene.add(ci);
+
+        camera.position.z=15;
+
+       //animacion
+        var animate = function(){
+            requestAnimationFrame(animate);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            circle.rotation.x += 0.01;
+            circle.rotation.y += 0.01;
+
+            ci.rotation.x += 0.01;
+            ci.rotation.y += 0.01;
+
+            renderer.render(scene,camera);
+        }
+        animate();
+
+
+
+    </script>
+</body>
+</html>
